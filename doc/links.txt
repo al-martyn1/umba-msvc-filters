@@ -1,0 +1,21 @@
+Project and Solution Files - https://learn.microsoft.com/en-us/cpp/build/reference/project-and-solution-files?view=msvc-170
+
+vcxproj.filters files - https://learn.microsoft.com/en-us/cpp/build/reference/vcxproj-filters-files?view=msvc-170
+   Иерархию можно строить:
+     1) исходя сначала из модуля, к которому принадлежит файл, а потом из типа файла - umba\Sources, umba\Headers
+     2) исходя сначала из типа файла, а потом из модуля, к которому принадлежит файл - Sources\umba, Headers\umba
+
+свойства MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-properties?view=vs-2022
+
+Справочные сведения о MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-reference?view=vs-2022
+Основные понятия MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-concepts?view=vs-2022
+MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild?view=vs-2022
+Практическое руководство. Использование переменных среды в сборке - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/how-to-use-environment-variables-in-a-build?view=vs-2022
+Практическое руководство. Использование ссылки на имя или расположение файла проекта - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/how-to-reference-the-name-or-location-of-the-project-file?view=vs-2022
+Практическое руководство. Построение одинаковых исходных файлов с различными параметрами - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/how-to-build-the-same-source-files-with-different-options?view=vs-2022
+Зарезервированные и стандартные свойства MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022
+Элемент Property (MSBuild) - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/property-element-msbuild?view=vs-2022
+Экранируемые специальные знаки - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/special-characters-to-escape?view=vs-2022
+Справочные сведения о MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-reference?view=vs-2022
+Зарезервированные и стандартные свойства MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022
+

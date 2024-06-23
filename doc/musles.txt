@@ -1,0 +1,131 @@
+1) Добавляем в проект файлы документации
+
+  <ItemGroup>
+    <ClCompile Include="..\src\umba-md-pp\umba-md-pp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <None Include="..\README.md"/>  <!-- Файл документации -->
+  </ItemGroup>
+
+2) Парсим проект
+
+<Project>
+
+  <ItemGroup>
+    <ClCompile Include="..\src\umba-md-pp\umba-md-pp-view.cpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="..\src\umba-md-pp\umba-md-pp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <None Include="..\README.md"/>
+  </ItemGroup>
+
+  <Import Project="$(UMBA_LOCAL_LIBS_ROOT)\umba\.msvc\headers.props" />
+
+  <ItemGroup>
+    <ResourceCompile Include="..\src\umba-md-pp\_umba-md-pp-view.rc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClInclude Include="..\_libs\umba\char_writers.h" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="..\src\umba-msvc-filters\umba-msvc-filters.cpp"</ClCompile>
+    <None Include="..\README.md" />
+    <ClInclude Include="..\src\umba-msvc-filters\utils.h" />
+  </ItemGroup>
+
+</Project>
+
+Парсим тэги ItemGroup
+   Обрабатываем внутри тэги ClCompile, ResourceCompile
+      Если есть внутри тэг Filter - то для файла задаём этот фильтр
+   Если для файла фильтр не задан, то определяем фильтр по расширению
+   и пути в зависимости от стратегии:
+    - "модуль\тип"
+    - "тип\модуль"
+
+Парсим тэги Import Project
+  <Import Project="$(UMBA_LOCAL_LIBS_ROOT)\umba\.msvc\headers.props" />
+Это файлы в таком же формате, как и файл проекта.
+
+Обрабатываем переменные вида $(UMBA_LOCAL_LIBS_ROOT).
+Переменые игнорируют регистр
+Есть неизвестные - их игнорируем и выводим варнинг об обнаружении неизвестной переменной
+  Опция - попробовать получить из переменных окружения
+  Вторая опция - если нашлось в переменных среды - то не выводить сообщения
+Есть игнорируемые:
+  VCTargetsPath
+  UserRootDir - хотя эту наверное можно и распарсить
+Есть пользовательские - UMBA_LOCAL_LIBS_ROOT - такие задаём из командной строки, чтобы
+  не углубляться в парсинг проектов пока слишком глубоко.
+Есть встроенные:
+  ProjectDir
+  SolutionDir
+  ProjectName
+  PlatformShortName
+  Configuration
+
+  Зарезервированные и стандартные свойства MSBuild - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022
+  MSBuildThisFileDirectory
+  MSBuildProjectDirectory
+  MSBuildProjectDirectoryNoRoot
+  MSBuildProjectExtension
+  MSBuildProjectFile
+  MSBuildProjectFullPath
+  MSBuildProjectName
+  MSBuildThisFile
+  MSBuildThisFileDirectory
+  MSBuildThisFileDirectoryNoRoot
+  MSBuildThisFileExtension
+  MSBuildThisFileFullPath
+  MSBuildThisFileName
+
+
+3) Имена групп (по расширению) задаём в командной строке (и в .options файлах)
+  --filetype-group=Sources:cpp,cc,cxx
+
+4) При генерации .filters-файла используем одноуровневую иерархию - никаких вложенных проектов/подпроектов
+
+5) Свойства, они же - переменные
+   Определение свойств и указание ссылок на них в файле проекта - https://learn.microsoft.com/ru-ru/visualstudio/msbuild/msbuild-properties?view=vs-2022
+   <PropertyGroup>
+       <BuildDir>Build</BuildDir>
+   </PropertyGroup>
+
+   Свойства среды
+   Обращаться к переменным среды в файлах проектов можно так же как к зарезервированным свойствам. 
+   Например, чтобы использовать переменную среды PATH в файле проекта, укажите оператор $(Path). 
+   Если проект содержит определение свойства с тем же именем, что и у свойства среды, свойство 
+   в проекте переопределит значение переменной среды.
+
+   Свойство реестра
+   $(registry:Hive\MyKey\MySubKey@Value)
+   Чтобы получить значение подраздела по умолчанию, опустите Value.
+   $(registry:Hive\MyKey\MySubKey)
+
+   <PropertyGroup>
+     <VisualStudioWebBrowserHomePage>
+       $(registry:HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\14.0\WebBrowser@HomePage)
+     </VisualStudioWebBrowserHomePage>
+   <PropertyGroup>
+
+6) Имена, которые конфликтуют с элементами MSBuild:
+   VisualStudioProject
+   Назначение
+   PropertyGroup
+   Выходные данные
+   ItemGroup
+   UsingTask
+   ProjectExtensions
+   OnError
+   ImportGroup
+   Выберите
+   When
+   Otherwise
+
+
+
