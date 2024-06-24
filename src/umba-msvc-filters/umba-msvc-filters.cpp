@@ -181,19 +181,24 @@ int safe_main(int argc, char* argv[])
     }
 
 
-        // Job completed - may be, --where option found
-        if (argsParser.mustExit)
-            return 0;
-       
-        if (!argsParser.parseStdBuiltins())
-            return 1;
-        if (argsParser.mustExit)
-            return 0;
-       
-        if (!argsParser.parse())
-            return 1;
-        if (argsParser.mustExit)
-            return 0;
+    // Job completed - may be, --where option found
+    if (argsParser.mustExit)
+        return 0;
+   
+    if (!argsParser.parseStdBuiltins())
+        return 1;
+    if (argsParser.mustExit)
+        return 0;
+   
+    if (!argsParser.parse())
+        return 1;
+    if (argsParser.mustExit)
+        return 0;
+
+    if (!argsParser.quet  /* && !hasHelpOption */ )
+    {
+        umba::cli_tool_helpers::printNameVersion(umbaLogStreamMsg);
+    }
 
 
     std::vector<std::string> inputFiles;
