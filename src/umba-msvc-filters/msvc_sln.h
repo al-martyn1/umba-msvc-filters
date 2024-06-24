@@ -31,8 +31,8 @@ struct ProjectDependency
 
         dependecyName.assign(line, 0, pos);
         dependecyGuid.assign(line, pos+3, line.npos);
-        umba::string_plus::trim(dependecyName, umba::string_plus::is_one_of("{}"));
-        umba::string_plus::trim(dependecyGuid, umba::string_plus::is_one_of("{}"));
+        umba::string_plus::trim(dependecyName, umba::string_plus::is_one_of<char>("{}"));
+        umba::string_plus::trim(dependecyGuid, umba::string_plus::is_one_of<char>("{}"));
         return true;
     }
 
@@ -61,7 +61,7 @@ struct SolutionProjectInfo
 
         entryGuid = std::string(line, 0, pos);
         line.erase(0, pos+5);
-        umba::string_plus::trim(entryGuid, umba::string_plus::is_one_of(" \"{}"));
+        umba::string_plus::trim(entryGuid, umba::string_plus::is_one_of<char>(" \"{}"));
 
         std::vector<std::string> vals;
         std::string::const_iterator it = line.begin();
@@ -97,7 +97,7 @@ struct SolutionProjectInfo
 
         for(auto &v : vals)
         {
-            umba::string_plus::trim(v, umba::string_plus::is_one_of(" \"{}"));
+            umba::string_plus::trim(v, umba::string_plus::is_one_of<char>(" \"{}"));
         }
 
         entryName  .assign(vals[0]);
