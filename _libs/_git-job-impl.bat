@@ -1,6 +1,7 @@
 @call :DO_GIT_JOB %1 %~dp0\encoding
 @call :DO_GIT_JOB %1 %~dp0\marty_cpp
 @call :DO_GIT_JOB %1 %~dp0\marty_pugixml
+@call :DO_GIT_JOB %1 %~dp0\pugixml
 @call :DO_GIT_JOB %1 %~dp0\sfmt
 @call :DO_GIT_JOB %1 %~dp0\umba
 
