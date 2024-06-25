@@ -12,6 +12,8 @@ set(PRJ_ROOT "${CMAKE_CURRENT_LIST_DIR}")
 set(SRC_ROOT "${PRJ_ROOT}/src")
 set(LIB_ROOT "${PRJ_ROOT}/_libs")
 
+include(${PRJ_ROOT}/.cmake/umba.cmake)
+
 include_directories(${LIB_ROOT})
 
 add_subdirectory(${LIB_ROOT}/encoding)
@@ -22,11 +24,10 @@ add_subdirectory(${LIB_ROOT}/sfmt)
 add_subdirectory(${LIB_ROOT}/umba)
 
 
-set(sources 
-    ${SRC_ROOT}/umba-msvc-filters/umba-msvc-filters.cpp
-   )
+set(sources "${SRC_ROOT}/umba-msvc-filters/umba-msvc-filters.cpp")
 
 add_executable(${PROJECT_NAME} ${sources})
+umba_add_target_options(${PROJECT_NAME} "CONSOLE")
 target_link_libraries(${PROJECT_NAME} PRIVATE encoding::encoding)
 target_link_libraries(${PROJECT_NAME} PRIVATE marty_cpp::marty_cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE marty_pugixml::marty_pugixml)
