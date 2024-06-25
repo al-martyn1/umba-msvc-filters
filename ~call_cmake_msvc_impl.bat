@@ -56,8 +56,8 @@ cmake --build .out\%TOOLSET%\%ARCH_PATH% --config Release --target ALL_BUILD -j 
 
 
 :ERR
-exit /b 1
+@exit /b 1
 
 :END
-exit /b 0
+@exit /b 0
 
