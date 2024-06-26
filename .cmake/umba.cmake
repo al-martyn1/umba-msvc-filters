@@ -4,6 +4,8 @@ include_guard(GLOBAL)
 # "SRCUTF8"
 function(umba_add_target_options TARGET)
 
+    # https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER_ID.html
+
     # https://jeremimucha.com/2021/02/cmake-functions-and-macros/
 
     #math(EXPR indices "${ARGC} - 1")
@@ -50,7 +52,7 @@ function(umba_add_target_options TARGET)
                 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
                     message(NOTICE "Add UTF8 options for Clang")
                 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-                    target_compile_options(${TARGET} PRIVATE "-finput-charset=UTF-8")
+                    target_compile_options(${TARGET} PRIVATE "-fexec-charset=UTF-8 -finput-charset=UTF-8")  # https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
                 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
                     message(NOTICE "Add UTF8 options for Intel")
                 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
